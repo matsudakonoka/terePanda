@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnpc.epai.core.workscene.mapper.KeywordMapper">
+
+    <select id="getKwList" resultType="com.cnpc.epai.core.workscene.entity.Keyword">
+        select * from sr_scene_keyword
+    </select>
+
+    <update id="updateUsaCount1" parameterType="java.util.List">
+        update sr_scene_keyword
+        set usage_count = usage_count + 1
+        where keyword_name in
+        <foreach collection="list" item="keyword" index="index" open="(" close=")" separator=",">
+            #{keyword.keywordName}
+        </foreach>
+    </update>
+
+    <resultMap id="BaseResultMap" type="com.cnpc.epai.core.workscene.entity.Keyword">
+        <id column="keyword_id" jdbcType="VARCHAR" property="keywordId" />
+        <result column="keyword_name" jdbcType="VARCHAR" property="keywordName" />
+        <result column="keyword_type" jdbcType="VARCHAR" property="keywordType" />
+        <result column="usage_count" jdbcType="INTEGER" property="usageCount" />
+        <result column="bsflag" jdbcType="VARCHAR" property="bsflag" />
+        <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    </resultMap>
+
+
+    <select id="findList" parameterType="string" resultType="com.cnpc.epai.core.workscene.entity.Keyword">
+        select * from sr_scene_keyword where  keyword_name like '%${keywordName}%'
+    </select>
+
+    <select id="findAll" resultType="com.cnpc.epai.core.workscene.entity.Keyword">
+        select * from sr_scene_keyword
+    </select>
+
+    <select id="isExit" parameterType="String" resultType="Integer">
+        select count(*) from sr_scene_keyword where sr_scene_keyword.keyword_name = #{keywordName}
+    </select>
+    <delete id="deleteById" parameterType="String">
+        delete  from sr_scene_keyword  where keyword_id = #{keywordId}
+    </delete>
+
+</mapper>

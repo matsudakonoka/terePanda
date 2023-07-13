@@ -1,0 +1,20 @@
+spring:
+  profiles.active: ${profile:default}
+  cloud:
+    config:
+      uri: http://config.dev.pcep.cloud
+      fail-fast: true
+  application:
+      name: 3011worktask
+
+eureka:
+  client:
+    registerWithEureka: false
+
+---
+spring.profiles: DEV
+
+spring:
+  cloud:
+    config:
+      uri : http://springcloudconfig:8080

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnpc.epai.core.workscene.mapper.KeywordEntityMapper">
+
+    <update id="updateUsaCount1" parameterType="java.util.List">
+        update sr_scene_keyword_re
+        set usage_count = usage_count + 1
+        where keyword_name in
+        <foreach collection="list" item="keyword" index="index" open="(" close=")" separator=",">
+            #{keyword.keywordName}
+        </foreach>
+    </update>
+
+
+</mapper>

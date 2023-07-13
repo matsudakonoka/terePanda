@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnpc.epai.core.worktask.mapper.SrPresetSceneTaskMapper">
+  <resultMap id="BaseResultMap" type="com.cnpc.epai.core.worktask.pojo.SrPresetSceneTask">
+    <id column="preset_scene_task_id" jdbcType="VARCHAR" property="presetSceneTaskId" />
+    <result column="task_id" jdbcType="VARCHAR" property="taskId" />
+    <result column="scene_id" jdbcType="VARCHAR" property="sceneId" />
+    <result column="workroom_id" jdbcType="VARCHAR" property="workroomId" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="bsflag" jdbcType="CHAR" property="bsflag" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    preset_scene_task_id, task_id, scene_id, workroom_id, remarks, bsflag, create_user, 
+    create_date, update_user, update_date
+  </sql>
+  <select id="selectByExample" parameterType="com.cnpc.epai.core.worktask.pojo.SrPresetSceneTaskExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from epai_crpadmin.sr_preset_scene_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from epai_crpadmin.sr_preset_scene_task
+    where preset_scene_task_id = #{presetSceneTaskId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from epai_crpadmin.sr_preset_scene_task
+    where preset_scene_task_id = #{presetSceneTaskId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cnpc.epai.core.worktask.pojo.SrPresetSceneTaskExample">
+    delete from epai_crpadmin.sr_preset_scene_task
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cnpc.epai.core.worktask.pojo.SrPresetSceneTask">
+    insert into epai_crpadmin.sr_preset_scene_task (preset_scene_task_id, task_id, scene_id, 
+      workroom_id, remarks, bsflag, 
+      create_user, create_date, update_user, 
+      update_date)
+    values (#{presetSceneTaskId,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR}, #{sceneId,jdbcType=VARCHAR}, 
+      #{workroomId,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{bsflag,jdbcType=CHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cnpc.epai.core.worktask.pojo.SrPresetSceneTask">
+    insert into epai_crpadmin.sr_preset_scene_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="presetSceneTaskId != null">
+        preset_scene_task_id,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="sceneId != null">
+        scene_id,
+      </if>
+      <if test="workroomId != null">
+        workroom_id,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="bsflag != null">
+        bsflag,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="presetSceneTaskId != null">
+        #{presetSceneTaskId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="sceneId != null">
+        #{sceneId,jdbcType=VARCHAR},
+      </if>
+      <if test="workroomId != null">
+        #{workroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="bsflag != null">
+        #{bsflag,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map">
+    update epai_crpadmin.sr_preset_scene_task
+    <set>
+      <if test="record.presetSceneTaskId != null">
+        preset_scene_task_id = #{record.presetSceneTaskId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskId != null">
+        task_id = #{record.taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sceneId != null">
+        scene_id = #{record.sceneId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workroomId != null">
+        workroom_id = #{record.workroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsflag != null">
+        bsflag = #{record.bsflag,jdbcType=CHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update epai_crpadmin.sr_preset_scene_task
+    set preset_scene_task_id = #{record.presetSceneTaskId,jdbcType=VARCHAR},
+      task_id = #{record.taskId,jdbcType=VARCHAR},
+      scene_id = #{record.sceneId,jdbcType=VARCHAR},
+      workroom_id = #{record.workroomId,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      bsflag = #{record.bsflag,jdbcType=CHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cnpc.epai.core.worktask.pojo.SrPresetSceneTask">
+    update epai_crpadmin.sr_preset_scene_task
+    <set>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="sceneId != null">
+        scene_id = #{sceneId,jdbcType=VARCHAR},
+      </if>
+      <if test="workroomId != null">
+        workroom_id = #{workroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="bsflag != null">
+        bsflag = #{bsflag,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where preset_scene_task_id = #{presetSceneTaskId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cnpc.epai.core.worktask.pojo.SrPresetSceneTask">
+    update epai_crpadmin.sr_preset_scene_task
+    set task_id = #{taskId,jdbcType=VARCHAR},
+      scene_id = #{sceneId,jdbcType=VARCHAR},
+      workroom_id = #{workroomId,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      bsflag = #{bsflag,jdbcType=CHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where preset_scene_task_id = #{presetSceneTaskId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.nogizaka46.termFifth.mapper.TerePandaVideosMapper">
+  <resultMap id="BaseResultMap" type="org.example.nogizaka46.termFifth.entity.TerePandaVideos">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="time" jdbcType="DATE" property="time" />
+    <result column="members" jdbcType="VARCHAR" property="members" />
+    <result column="groups" jdbcType="VARCHAR" property="groups" />
+    <result column="headerimage" jdbcType="VARCHAR" property="headerimage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `name`, url, `time`, members, `groups`, headerimage
+  </sql>
+</mapper>

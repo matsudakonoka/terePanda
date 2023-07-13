@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generate.TerePandaBlogsMapper">
+  <resultMap id="BaseResultMap" type="generate.TerePandaBlogs">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="filename" jdbcType="VARCHAR" property="filename" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, "date", title, filename
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from "blog"
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from "blog"
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="generate.TerePandaBlogs" useGeneratedKeys="true">
+    insert into "blog" ("date", title, filename
+      )
+    values (#{date,jdbcType=DATE}, #{title,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="generate.TerePandaBlogs" useGeneratedKeys="true">
+    insert into "blog"
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="date != null">
+        "date",
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="filename != null">
+        filename,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="generate.TerePandaBlogs">
+    update "blog"
+    <set>
+      <if test="date != null">
+        "date" = #{date,jdbcType=DATE},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null">
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="generate.TerePandaBlogs">
+    update "blog"
+    set "date" = #{date,jdbcType=DATE},
+      title = #{title,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

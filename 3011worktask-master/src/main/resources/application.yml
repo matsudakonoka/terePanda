@@ -1,0 +1,25 @@
+mybatis-plus:
+  mapper-locations: classpath:com/cnpc/epai/core/**/mapper/xml/*.xml
+logging:
+  level:
+    com:
+      cnpc:
+        epai:
+          core:
+            workscene:
+              mapper: info
+              service: info
+              util: info
+            worktask:
+              mapper: info
+              service: info
+              util: info
+spring:
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+  rabbitmq:
+    listener:
+      simple:
+        acknowledge-mode: manual
+

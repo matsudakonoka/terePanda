@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnpc.epai.core.worktask.mapper.SrTaskLogMapper">
+  <resultMap id="BaseResultMap" type="com.cnpc.epai.core.worktask.pojo.SrTaskLog">
+    <id column="task_log_id" jdbcType="VARCHAR" property="taskLogId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="workroom_id" jdbcType="VARCHAR" property="workroomId" />
+    <result column="task_id" jdbcType="VARCHAR" property="taskId" />
+    <result column="oper_time" jdbcType="DATE" property="operTime" />
+    <result column="oper_type" jdbcType="VARCHAR" property="operType" />
+    <result column="oper_content" jdbcType="VARCHAR" property="operContent" />
+    <result column="bsflag" jdbcType="CHAR" property="bsflag" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    task_log_id, user_id, workroom_id, task_id, oper_time, oper_type, oper_content, bsflag, 
+    remarks, create_user, create_date, update_user, update_date
+  </sql>
+  <select id="selectByExample" parameterType="com.cnpc.epai.core.worktask.pojo.SrTaskLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from epai_crpadmin.sr_task_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from epai_crpadmin.sr_task_log
+    where task_log_id = #{taskLogId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from epai_crpadmin.sr_task_log
+    where task_log_id = #{taskLogId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cnpc.epai.core.worktask.pojo.SrTaskLogExample">
+    delete from epai_crpadmin.sr_task_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cnpc.epai.core.worktask.pojo.SrTaskLog">
+    insert into epai_crpadmin.sr_task_log (task_log_id, user_id, workroom_id, 
+      task_id, oper_time, oper_type, 
+      oper_content, bsflag, remarks, 
+      create_user, create_date, update_user, 
+      update_date)
+    values (#{taskLogId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{workroomId,jdbcType=VARCHAR}, 
+      #{taskId,jdbcType=VARCHAR}, #{operTime,jdbcType=DATE}, #{operType,jdbcType=VARCHAR}, 
+      #{operContent,jdbcType=VARCHAR}, #{bsflag,jdbcType=CHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cnpc.epai.core.worktask.pojo.SrTaskLog">
+    insert into epai_crpadmin.sr_task_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskLogId != null">
+        task_log_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="workroomId != null">
+        workroom_id,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="operTime != null">
+        oper_time,
+      </if>
+      <if test="operType != null">
+        oper_type,
+      </if>
+      <if test="operContent != null">
+        oper_content,
+      </if>
+      <if test="bsflag != null">
+        bsflag,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskLogId != null">
+        #{taskLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="workroomId != null">
+        #{workroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null">
+        #{operTime,jdbcType=DATE},
+      </if>
+      <if test="operType != null">
+        #{operType,jdbcType=VARCHAR},
+      </if>
+      <if test="operContent != null">
+        #{operContent,jdbcType=VARCHAR},
+      </if>
+      <if test="bsflag != null">
+        #{bsflag,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map">
+    update epai_crpadmin.sr_task_log
+    <set>
+      <if test="record.taskLogId != null">
+        task_log_id = #{record.taskLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workroomId != null">
+        workroom_id = #{record.workroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskId != null">
+        task_id = #{record.taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operTime != null">
+        oper_time = #{record.operTime,jdbcType=DATE},
+      </if>
+      <if test="record.operType != null">
+        oper_type = #{record.operType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operContent != null">
+        oper_content = #{record.operContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsflag != null">
+        bsflag = #{record.bsflag,jdbcType=CHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update epai_crpadmin.sr_task_log
+    set task_log_id = #{record.taskLogId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      workroom_id = #{record.workroomId,jdbcType=VARCHAR},
+      task_id = #{record.taskId,jdbcType=VARCHAR},
+      oper_time = #{record.operTime,jdbcType=DATE},
+      oper_type = #{record.operType,jdbcType=VARCHAR},
+      oper_content = #{record.operContent,jdbcType=VARCHAR},
+      bsflag = #{record.bsflag,jdbcType=CHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cnpc.epai.core.worktask.pojo.SrTaskLog">
+    update epai_crpadmin.sr_task_log
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="workroomId != null">
+        workroom_id = #{workroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null">
+        oper_time = #{operTime,jdbcType=DATE},
+      </if>
+      <if test="operType != null">
+        oper_type = #{operType,jdbcType=VARCHAR},
+      </if>
+      <if test="operContent != null">
+        oper_content = #{operContent,jdbcType=VARCHAR},
+      </if>
+      <if test="bsflag != null">
+        bsflag = #{bsflag,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where task_log_id = #{taskLogId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cnpc.epai.core.worktask.pojo.SrTaskLog">
+    update epai_crpadmin.sr_task_log
+    set user_id = #{userId,jdbcType=VARCHAR},
+      workroom_id = #{workroomId,jdbcType=VARCHAR},
+      task_id = #{taskId,jdbcType=VARCHAR},
+      oper_time = #{operTime,jdbcType=DATE},
+      oper_type = #{operType,jdbcType=VARCHAR},
+      oper_content = #{operContent,jdbcType=VARCHAR},
+      bsflag = #{bsflag,jdbcType=CHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where task_log_id = #{taskLogId,jdbcType=VARCHAR}
+  </update>
+</mapper>

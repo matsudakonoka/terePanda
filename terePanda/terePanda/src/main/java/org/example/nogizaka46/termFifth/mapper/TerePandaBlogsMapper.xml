@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.nogizaka46.termFifth.mapper.TerePandaBlogsMapper">
+  <resultMap id="BaseResultMap" type="org.example.nogizaka46.termFifth.entity.TerePandaBlogs">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="filename" jdbcType="VARCHAR" property="filename" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `date`, title, filename
+  </sql>
+</mapper>

@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  3011worktask:
+    image: 'hub.epai.io:8000/library/3011worktask:latest'
+    container_name: rf-3011worktask
+    restart: always
+    ports:
+      - '30110:8080'
+      - '30119:8301'
+    networks:
+      - default
+    volumes:
+      - /home/rf/docker-elk/applogs:/var/log
+
+networks:
+  default:
+    external:
+      name: rf_default
